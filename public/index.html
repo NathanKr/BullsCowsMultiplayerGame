@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+   <meta charset="UTF-8">
+   <title>Chat App</title>
+</head>
+<body>
+   <h2>Welcome to the chat app</h2>
+   <script src="/socket.io/socket.io.js"></script>
+   <script src="index.js"></script>
+
+   <div id='joinRoom'>
+      <form onsubmit="handleJoinRoom(event)">
+         <select id='selectRoom'>
+            <option value="React">React course</option>
+            <option value="Node">Node course</option>
+          </select>
+          <br/><br/>
+         <input type="submit" value="Join Room"/>
+         <br/><br/><br/>
+      </form>
+   </div>
+
+
+   <div id='room'>
+      Room : <label id='roomName'></label><br/>
+      Messages
+      <ol id='messages'>
+   
+      </ol>
+      <form onsubmit="submitMessageHandler(event)">
+         From <br/>
+         <input id='from' type="text" value="Nathan"/>
+         <br/><br/>
+         Text <br/>
+         <input id='text' type="text" value="Hi everyone"/>
+         <br/><br/>
+         <input type="submit" value="Send"/>
+      </form>
+   </div>
+</body>
+</html>
+
+
