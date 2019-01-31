@@ -49,6 +49,7 @@ Node.js
     <th>Name</th>
     <th>Issued by</th> 
     <th>Description</th>
+    <th>Arguments</th>
   </tr>
   <tr>
     <td>newMessage</td>
@@ -60,16 +61,19 @@ Node.js
     <li>broadcast createMessage</li>
     </ul>
      </td>
+     <td></td>
   </tr>
   <tr>
     <td>joinRoom</td>
     <td>client</td> 
     <td>request to join a room</td>
+    <td>room name , user name</td>
   </tr>
   <tr>
     <td>createMessage</td>
     <td>client</td> 
     <td>general message used for game : from , text</td>
+    <td></td>
   </tr>
 </table>
 
