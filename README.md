@@ -14,6 +14,12 @@ Node.js
 </ul>
 </ul>
 
+<h2>Design considerations</h2>
+<ul>
+<li>Provide DAL for users \ rooms so one can change easyly underline layer : memory , file , mongodb , monsoose</li>
+<li>DAL is implemented via promise to support async opeations such as access to DB or file</li>
+</ul>
+
 
 
 <h2>Points of interest</h2>
@@ -23,6 +29,166 @@ Node.js
 <li>read from socket is done via on</li>
 <li>enter a room is done via join</li>
 </ul>
+
+<h2>Entities</h2>
+<h3>Constraints</h3>
+<ol>
+<li>user name is unique</li>
+<li>room name is unique</li>
+</ol>
+
+<h3>User Entity</h3>
+<table>
+  <tr>
+    <th>Operation</th>
+    <th>Arguments</th>
+    <th>Ack</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Add</td>
+    <td>User name , room name</td>
+    <td>same as Room Create</td>
+    <td>Add to room</td> 
+  </tr>
+  <tr>
+    <td>Delete</td>
+     <td>User name , room name</td>
+     <td>same as Room Create</td>
+    <td>Delete from room</td> 
+  </tr>
+</table>
+
+<h3>Room Entity</h3>
+<table>
+  <tr>
+    <th>Operation</th>
+    <th>Arguments</th>
+    <th>Ack</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Create</td>
+    <td>Room name</td>
+    <td>{err : err description , "" if ok}</td>
+    <td>Create new room</td> 
+  </tr>
+  <tr>
+    <td>Delete</td>
+    <td>Room name</td>
+    <td>same as Create</td>
+    <td>Delete room</td> 
+  </tr>
+  <tr>
+    <td>GetAll</td>
+    <td>None</td>
+    <td>{rooms : array of room names , err : err description , "" if ok}</td>
+    <td>Get All rooms</td> 
+  </tr>
+</table>
+
+<h3>Game Entity</h3>
+<table>
+  <tr>
+    <th>Operation</th>
+    <th>Arguments</th>
+    <th>Ack</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Create</td>
+    <td>Game name</td>
+    <td>same as Room Create</td>
+    <td>Create a game</td> 
+  </tr>
+  <tr>
+    <td>Delete</td>
+    <td>Game name</td>
+    <td>Same as Room Create</td>
+    <td>Delete a game</td> 
+  </tr>
+  <tr>
+    <td>GetAll</td>
+    <td>None</td>
+    <td>{games : array of game names , err : err description , "" if ok}</td>
+    <td>Get all games name</td> 
+  </tr>
+</table>
+
+<h3>BullsAndCows game Entity (inherit Game ?)</h3>
+<table>
+  <tr>
+    <th>Operation</th>
+     <th>Arguments</th>
+     <th>Ack</th>
+    <th>Description</th>
+    <th>Issued by</th>
+  </tr>
+  <tr>
+    <td>Start</td>
+    <td>room name</td>
+    <td>Same as Room Create</td>
+    <td>Start the game. This looks like generic stuff, can i inherit this ??</td> 
+    <td>Client</td>
+  </tr>
+  <tr>
+    <td>GameIsOver</td>
+    <td>room name</td>
+<td>{winner : name of winner or "" for draw , err : err description , "" if ok}</td>
+    <td>Get the game winner. This looks like generic stuff, can i inherit this ??</td> 
+    <td>Server</td>
+  </tr>
+  <tr>
+    <td>SubmitGuess</td>
+    <td>guess, user from , user to , room</td>
+    <td>{bulls : #of bulls , cows : # of cows , err : err description , "" if ok}  </td>
+    <td>submit guess from user targeting to user</td>
+    <td>Client</td>
+</tr>
+<tr>
+    <td>SetMaxTries</td>
+    <td>room name</td>
+    <td></td>
+    <td></td>
+    <td>client , server. first phase only server</td>
+</tr>
+<tr>
+    <td>GetMaxTries</td>
+    <td>room name</td>
+    <td></td>
+    <td></td>
+    <td>client</td>
+</tr>
+<tr>
+    <td>GetWordLength</td>
+    <td>room name</td>
+    <td></td>
+    <td></td>
+    <td>client</td>
+</tr>
+<tr>
+    <td>SetWordLength</td>
+    <td>room name</td>
+    <td></td>
+    <td></td>
+    <td>client , server. first phase only server</td>
+</tr>
+<tr>
+    <td>SetCurrentTry</td>
+    <td>room name</td>
+    <td></td>
+    <td></td>
+    <td>client , server. first phase only server</td>
+</tr>
+<tr>
+    <td>GetCurrentTry</td>
+    <td>room name</td>
+    <td></td>
+    <td></td>
+    <td>client , server.</td>
+</tr>
+</table>
+
 
 <h2>Socket.io Events</h2>
 <table>
