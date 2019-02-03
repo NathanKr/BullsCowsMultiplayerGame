@@ -27,6 +27,8 @@ Node.js
 <li>It is ready to be deployed to heroku (engines is needed ?)</li>
 <li>write to socket is done via emit</li>
 <li>read from socket is done via on</li>
+<li>send to other beside sender is done via broadcast</li>
+<li>send to room is done via to(room name)
 <li>enter a room is done via join</li>
 </ul>
 
@@ -36,6 +38,8 @@ Node.js
 <li>user name is unique</li>
 <li>room name is unique</li>
 </ol>
+
+remarks : these constraints can be removed if id is used instead of name(using id is more general anyway)
 
 <h3>User Entity</h3>
 <table>
