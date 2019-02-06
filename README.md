@@ -1,12 +1,18 @@
 <h2>Introduction</h2>
-Game rooms using socket.io
+This project implements multiplayer Bulls and Cows game + chat per room 
+
+Notice - it is half baked and not ready for usage!!!!!!!!!!!!!
+
+
+<h2>Real time communication</h2>
+Socket.io
 
 <h2>Server</h2>
 Node.js
 
 <h2>Client</h2>
 <ul>
-<li>Browser - vanilla JS</li>
+<li>Browser - vanilla JS (soon to be replaced with React)</li>
 <li>View</li>
 <ul>
 <li>choose game room</li>
