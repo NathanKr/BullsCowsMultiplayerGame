@@ -1,24 +1,30 @@
-let socket = io();
+// used let socket = io();
 
-window.onload = () => (document.getElementById("room").style.display = "none");
+//no need window.onload = () => (document.getElementById("room").style.display = "none");
 
-socket.on("connect", () => {
+/* usedsocket.on("connect", () => {
   console.log("client connected to server");
-});
+});*/
 
+/*
+used
 socket.on("newMessage", ({ text, from }) => {
   console.log("got newMessage event from server : ", text, from);
   addMessageFromServer(`${from} -> ${text}`);
-});
+});*/
 
-socket.on("disconnect", () => console.log("socket disconnected"));
+// used socket.on("disconnect", () => console.log("socket disconnected"));
 
+/*
+used
 const addMessageFromServer = msg => {
   const liElem = document.createElement("li");
   liElem.innerText = msg;
   document.getElementById("messages").appendChild(liElem);
-};
+};*/
 
+/*
+used 
 const handleJoinRoom = event => {
   const selectedRoom = document.getElementById("selectRoom").value;
   event.preventDefault(); // will not cause page refresh
@@ -34,7 +40,7 @@ const handleJoinRoom = event => {
       document.getElementById("room").style.display = "block";
     }
   );
-};
+};*/
 
 const submitMessageHandler = event => {
   event.preventDefault(); // will not cause page refresh

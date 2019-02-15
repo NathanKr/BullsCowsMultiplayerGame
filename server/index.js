@@ -1,13 +1,11 @@
 const constants = require("./constans");
 const utils = require("./utils");
 const express = require("express");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-const path = require("path");
 
-app.use(express.static(path.join(__dirname, "../") + "/public"));
 
 const socketIo = require("socket.io");
 const io = socketIo(server);
@@ -44,11 +42,14 @@ io.on("connect", socket => {
 
       // --- send to all client beside the one that send it
       socket.broadcast.to(room).emit(newMessage, { from, text });
-      ackCallback("this is server ack");
-    });
+      ackCallback(`this is server ack : ${createMessage}`);
+    }); // --- end createMessage , inside joinRoom because room is used
 
+
+    
     // --- respond to disconnect after client is closed
     socket.on("disconnect", () => {
+      console.log(`server got connection disconnected. socket id : ${socket.id}`);
       // --- send on connect to all beside this client
       socket.broadcast
         .to(room)
@@ -56,10 +57,11 @@ io.on("connect", socket => {
           newMessage,
           utils.createMessage(admin, "User has exit the chat room")
         );
-    });
+    }); // --- end disconnect , inside joinRoom because room is used
 
-    ackCallback("this is server ack");
-  });
-});
+    ackCallback(`this is server ack : ${joinRoom}`);
+  }); // --- end joinRoom
+
+}); // --- end connect
 
 server.listen(port, () => console.log(`app is listening on port : ${port}`));
